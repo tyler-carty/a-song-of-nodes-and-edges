@@ -1,4 +1,4 @@
-# a-song-of-nodes-and-edges
+# A Song of Nodes & Edges
 
 This site aims to improve your understanding of the complex and incredibly well written character interactions within the book series "A Song of Ice and Fire", written by George R. R. Martin. The major houses from the series are shown below, each with a colour that will be used in the character network.
 
