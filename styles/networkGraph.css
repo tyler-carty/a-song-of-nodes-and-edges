@@ -1,0 +1,44 @@
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2em 0em;
+}
+
+label {
+    font-size: 1.7em;
+    align-self: center;
+    margin: 0 1em 0 0;
+}
+
+.network-graph {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.node {
+    cursor: pointer;
+    stroke-width: 2.4px;
+}
+
+.link {
+    stroke: #39383d;
+    opacity: 0.1;
+}
+
+.tooltip {
+    position: absolute;
+    background: rgba(57, 56, 61, 0.9);
+    border-radius: 0.1rem;
+    color: #fff;
+    display: block;
+    font-size: 1.4rem;
+    max-width: 320px;
+    padding: 0.5rem 0.7rem;
+    visibility: hidden;
+}
+
+#sizeBtn {
+    margin-left: 2em;
+}

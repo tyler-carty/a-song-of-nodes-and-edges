@@ -1,0 +1,65 @@
+.key {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em 0em 5em 0em;
+}
+
+.legend-title {
+    font-size: 1.4em;
+    display: inline-block;
+    margin-bottom: 1em;
+    font-weight: 700;
+}
+
+.key-block-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.key-block {
+    color:#FFF;
+    font-weight: 700;
+    font-size: 1.4em;
+    padding: 0.6em 1em;
+    background-color: #3d3d3d;
+    cursor: pointer;
+}
+
+.stark {
+    background-color: #7B9070;
+}
+
+.baratheon {
+    background-color: #E7D271;
+}
+
+.targaryen {
+    background-color: #A71414;
+}
+
+.tyrell {
+    background-color: #34936A;
+}
+
+.tully {
+    background-color: #4F729E;
+}
+
+.greyjoy {
+    background-color: #0D0D0D;
+}
+
+.lannister {
+    background-color: #BB6861;
+}
+
+.arryn {
+    background-color: #638497;
+}
+
+.martell {
+    background-color: #D99061;
+}

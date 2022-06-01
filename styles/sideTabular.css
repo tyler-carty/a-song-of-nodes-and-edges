@@ -1,0 +1,82 @@
+.sideTabular {
+    height: 425px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    background-color: #f6efe5;
+    overflow-x: hidden;
+    padding-top: 50px;
+    transition: 0.5s;
+    color: #3d3d3d;
+}
+
+.sideTabular.left {
+    left: 0;
+}
+
+.sideTabular.right {
+    right: 0;
+}
+
+.sideTabular.chart {
+    left: 0;
+}
+
+.sideTabular .closebtn{
+    color: #3d3d3d;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.tabular-content {
+    min-width: 200px;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.tabular-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-bottom: 1.5em;
+}
+
+.tabular-title {
+    flex-basis: 4.5em;
+    margin-right: 1em;
+    font-size: 1.4em;
+    display: block;
+    flex-shrink: 0;
+}
+
+.tabular-text {
+    min-width: 113px;
+    flex-grow: 1;
+    align-self: bottom;
+    font-size: 1.4em;
+    color: #3d3d3d;
+}
+
+.tabular-image {
+    margin-bottom: 1.2em;
+    display: flex;
+}
+
+#tImage, #eImage, #mImage {
+    max-width: 144px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#selectBtn {
+    margin: 0 60.3267px;
+}
+
+a {
+    text-decoration: none;
+}

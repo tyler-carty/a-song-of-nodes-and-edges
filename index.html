@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="shortcut icon" href="./images/sideTabularLogo.png" />
+        <title>A Song of Nodes and Edges</title>
+        <link rel="stylesheet" href="styles/style.css" />
+        <script src="scripts/jquery-1.10.2.min.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+
+            <!-- START OF HEADER & LOGO -->
+
+            <div class="header-container">
+                <img src="./images/asoiaf-title.png" alt="ASOIAF">
+                </br></br>
+                <img src="./images/asoiaf-subtitle.png" alt="ASOIAF">
+            </div>
+            </br></br>
+
+            <!-- START OF SITE INFO -->
+
+            <div class="center-image">
+                <p class="text-block">This site aims to improve your understanding of the complex and incredibly well
+                    written character interactions within the book series "A Song of Ice and Fire", written by George
+                    R. R. Martin. The major houses from the series are shown below, each with a colour that will be used
+                    in the character network.
+                    </br></br>
+                    The visualisation makes use of the D3.js library to create a network of character interactions and
+                    family/friend relationships throughout the book series. This information is based on the ASOIAF
+                    Dataset which is available at <a href="https://github.com/mathbeveridge/asoiaf"><nobr>this address.</nobr></a>
+                    The purpose is to improve your understanding of the complexities of the “A Song of Ice and Fire” story line
+                    and hopefully educate you on some lesser known characters, and their importance in the story.
+                </p>
+                </br></br>
+                <p class="text-block">
+                    1. Choose a book from the dropdown menu to view the network of that book.
+                    </br>
+                    2. Hover over a node on the graph to see a summary of that character and their relationships.
+                    </br>
+                    3. Thicker connections between nodes represent a more significant connection between characters.
+                    </br>
+                    4. The bigger the node, the more important that character is during the book chosen.
+                    </br>
+                    5. Sort the characters by their house name by interacting with the button provided.
+                    </br>
+                    6. Search for specific characters & house names using the search bar provided.
+                    </br>
+                    7. Quickly filter by house name by interacting with the name blocks on the legend.
+                    </br>
+                    8. See character data by clicking on one of the nodes, a tabular navbar will appear.
+                    </br>
+                    9. Edit character data by clicking on the edit button of the tabular navbar.
+                    </br>
+                    10. Get a closer look by zooming in, use your mouse wheel or double click.
+                </p>
+            </div>
+            </br>
+
+            <!-- START OF CONTROLS -->
+
+            <div class="controls">
+                <div class="search-container">
+                    <form name="myform" id="myForm" onSubmit="return false">
+                        <input
+                                type="text"
+                                id="myVal"
+                                placeholder="Search&hellip;"
+                                class="search-input"
+                                onkeyup= "handleSearch()"
+                        />
+                    </form>
+                </div>
+                <div class="dropdown" style="width:200px;">
+                    <select id="bookSelect">
+                        <option value="book1">A Game of Thrones</option>
+                        <option value="book2">A Clash of Kings</option>
+                        <option value="book3">A Storm of Swords</option>
+                        <option value="book4">A Feast for Crows</option>
+                        <option value="book5">A Dance with Dragons</option>
+                        <option value="all" selected>A Song of Ice and Fire</option>
+                    </select>
+                </div>
+                <a id="clusterBtn" class="btn btn-unselected">
+                    Visualise the Houses of Westeros
+                </a>
+                <a id="tabularBtn" class="btn btn-unselected">
+                    Visualise the Interactions in Tabular Format
+                </a>
+                <a id="mostSignificantBtn" class="btn btn-unselected">
+                    Visualise the Most Significant Characters (Per Book)
+                </a>
+
+            </div>
+
+            <!-- START OF KEY -->
+
+            <div class="key">
+                <div class="key-block-container">
+                    <div class="key-block stark" onclick="handleSearchKey('Stark')"><p>Stark</p></div>
+                    <div class="key-block targaryen" onclick="handleSearchKey('Targaryen')"><p>Targaryen</p></div>
+                    <div class="key-block lannister" onclick="handleSearchKey('Lannister')"><p>Lannister</p></div>
+                    <div class="key-block baratheon" onclick="handleSearchKey('Baratheon')"><p>Baratheon</p></div>
+                    <div class="key-block tyrell" onclick="handleSearchKey('Tyrell')"><p>Tyrell</p></div>
+                    <div class="key-block martell" onclick="handleSearchKey('Martell')"><p>Martell</p></div>
+                    <div class="key-block greyjoy" onclick="handleSearchKey('Greyjoy')"><p>Greyjoy</p></div>
+                    <div class="key-block arryn" onclick="handleSearchKey('Arryn')"><p>Arryn</p></div>
+                    <div class="key-block tully" onclick="handleSearchKey('Tully')"><p>Tully</p></div>
+                    <div class="key-block" onclick="handleSearchKey('Misc')"><p>Misc</p></div>
+                </div>
+            </div>
+
+            <!-- START OF SNACKBARS -->
+
+            <div id="searchSnackbar">No character found.</div>
+            <div id="editSnackbar">No changes applied.</div>
+
+            <!-- START OF VISUALISATION -->
+
+            <div class="network-graph">
+                <svg
+                    id="network"
+                    width="1200"
+                    height="750"
+                    style="border: 1px solid rgba(57, 56, 61, 0.2);"
+                ></svg>
+            </div>
+
+            <!-- START OF TABLE -->
+
+            <div id="all-interactions" class="row" hidden>
+
+            </div>
+
+            <!-- START OF SIDE BARS -->
+
+            <div id="characterInfo" class="sideTabular right">
+                <a href="javascript:void(0)" class="closebtn right">&times;</a>
+                <div class="tabular-content">
+                    <div class="tabular-image">
+                        <img
+                                id="tImage"
+                                class="image"
+                                src="./images/sideTabularLogo.png"
+                                alt="logo"
+                        />
+                    </div>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    <div class="tabular-row">
+                        <h3 class="tabular-title">Name:</h3>
+                        <p id="tName" class="tabular-text">...</p>
+                    </div>
+                    <div class="tabular-row">
+                        <h3 class="tabular-title">House:</h3>
+                        <p id="tHouse" class="tabular-text">...</p>
+                    </div>
+                    <div class="tabular-row">
+                        <h3 class="tabular-title">Number of Links:</h3>
+                        <p id="tLinks" class="tabular-text">...</p>
+                    </div>
+                    <div class="tabular-row">
+                        <h3 class="tabular-title">Biggest Link:</h3>
+                        <p id="tClosestLink" class="tabular-text">...</p>
+                    </div>
+                    </br>
+                    </br>
+                    <div class="tabular-row">
+                        <a id="editNode" class="btn btn-unselected">
+                            Edit Character
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editCharacterInfo" class="sideTabular left">
+                <a href="javascript:void(0)" class="closebtn left">&times;</a>
+                <div class="tabular-content">
+                    <div class="tabular-image">
+                        <img
+                                id="eImage"
+                                class="image"
+                                src="./images/sideTabularLogo.png"
+                                alt="logo"
+                        />
+                    </div>
+                    </br>
+                    </br>
+                    <div class="tabular-row">
+                        <h3 class="tabular-title">Currently Editing:</h3>
+                        <p id="eCurrentlyEditing" class="tabular-text">...</p>
+                    </div>
+                    <div class="tabular-row">
+                        <h3 class="tabular-title">In This Book:</h3>
+                        <p id="eCurrentBook" class="tabular-text">...</p>
+                    </div>
+                    </br>
+                    <form name="editform" id="editForm" onSubmit="return false">
+                        <input type="hidden" id="editID">
+                        <div class="tabular-row">
+                            <input
+                                    type="text"
+                                    id="editName"
+                                    placeholder="Enter Edited Name&hellip;"
+                                    class="search-input"
+                            />
+                        </div>
+                        <div class="tabular-row">
+                            <input
+                                    type="text"
+                                    id="editHouse"
+                                    placeholder="Enter Edited House&hellip;"
+                                    class="search-input"
+                            />
+                        </div>
+                        </br>
+                        <a id="applyChanges" class="btn btn-unselected">
+                            Apply Changes
+                        </a>
+                    </form>
+                </div>
+            </div>
+
+            <div id="mostSignificantInfo" class="sideTabular chart">
+                <a href="javascript:void(0)" class="closebtn chart">&times;</a>
+                <div class="tabular-content">
+                    <div class="tabular-image">
+                        <img
+                                id="mImage"
+                                class="image"
+                                src="./images/sideTabularLogo.png"
+                                alt="logo"
+                        />
+                    </div>
+                    <div class="chartCard">
+                        <div class="chartBox" style="height: 300px">
+                            <canvas id="sigChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </br>
+            </br>
+            </br>
+
+            <footer>
+                <p>&copy; Application Development - 100535381</p>
+            </footer>
+        </div>
+    </body>
+    <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/dropdown.js" type="module"></script>
+    <script src="scripts/search.js" type="text/javascript"></script>
+</html>

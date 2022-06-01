@@ -1,0 +1,102 @@
+.scroll-container {
+    position: relative;
+}
+
+.scroll-container img {
+    position: absolute;
+    left: 50%;
+    top: -80px;
+    width: 25px;
+    animation: moveIcon 1s infinite alternate;
+}
+
+@keyframes moveIcon {
+    0% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(20px);
+    }
+}
+
+.highlight {
+    color: #c32436;
+}
+
+.header-container {
+    margin-top: 1em;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.logo {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.icon {
+    margin: 0 auto;
+    width: 20%;
+}
+
+.padding-top {
+    padding-top: 1.4em;
+}
+
+.padding-bottom {
+    padding-bottom: 1.4em;
+}
+
+.center-image {
+    text-align: center;
+}
+
+section {
+    position: relative;
+    padding-top: 10em;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.first-section {
+    padding: 15em 0 0 0;
+}
+
+.last-section {
+    padding: 10em 0 10em 0;
+}
+
+.text-block {
+    margin: 0 auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    font-size: 1.5em;
+    padding: 2em 3em;
+    background-color: #f6efe5;
+    display: inline-block;
+    max-width: 40em;
+}
+
+.text-block p {
+    display: inline;
+}
+
+#pinned-trigger1 {
+    position: absolute;
+    visibility: hidden;
+    top: -100px;
+}
+
+#pinned-trigger2, #pinned-trigger3 {
+    position: absolute;
+    visibility: hidden;
+    top: 300px;
+}
+
+#pinned-trigger4 {
+    position: absolute;
+    visibility: hidden;
+    top: 250px;
+}
